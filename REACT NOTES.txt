@@ -1,0 +1,2729 @@
+WHAT IS REACT?:
+
+React is Javascript Library, this is mainly for bulilding user interface as fast as possible 
+and it is use for single page Application. 
+React Built by Facebook released on 29 May 2013 
+and it has large community since it is very popular.
+
+
+React uses Virtual DOM(Document Object Module):
+
+1. Virtual DOM Update only Required List.
+2. Real DOM Update Complete List.
+
+
+
+=>Environment Use For React:
+
+1. Node.js
+2. Yarn
+
+first install Node.js latest Version and run it on Command promt
+check its version by typing- node -v
+check npm version which is along with node.js by typing- npm -v
+
+------------------------------------------------------------------------------
+
+After set up for first project of react installation
+there will be some auto created files in which two file are very important:
+
+1. App.js
+2. Index.js 
+
+
+
+
+There are some type of components are:
+ Components are piece of elements that we can reuse several times.
+
+1. Class Component
+2. Functional Component
+3. controlled Component
+4. Uncontrolled component
+5. Pure Component
+6. High Order Component
+
+------------------------------------------------------------------------------------------
+
+A class component is a JavaScript class that extends React. 
+Component which has a render method. ... On the other hand, when defining a class component, 
+you have to make a class that extends React. Component . 
+The JSX to render will be returned inside the render method.
+
+Syntax for Class Component with JSX(Javascript XML):
+
+import React,{Component} from 'react'
+class User extends Component{
+    render()
+    {
+        return(
+            <h2>Hello World</h2>
+        )
+    }
+}
+
+export default User;
+-------------------------------------------------------------------------------------------
+
+
+A functional component is just a plain JavaScript function that accepts props as an argument and returns a React element. 
+A class component requires you to extend from React. ... 
+React lifecycle methods can be used inside class components 
+(for example, componentDidMount). Hooks can be easily used in functional components.
+
+Syntax for Functional Component without JSX:
+
+import React from 'react'
+
+function User()
+{
+  return React.createElement('h1',null,'Hello User')
+}
+
+export default User;
+
+--------------------------------------------------------------------------------------------
+
+Syntax for Functional Component with JSX:
+
+function User()
+{
+     return(
+          <h1>Hello World</h1>  
+      )
+}
+
+export default User;
+
+----------------------------------------------------------------------------------------------
+
+CLICK EVENT AND FUNCTION:
+
+
+1. function Users(){
+  function app(){
+    alert('function called');
+  }
+  return(
+    <div class = "App">
+    <h1>Hello World</h1>,
+    <button onClick={app}>Click me</button>
+    </div>
+)
+}
+
+export default Users;
+
+--------------------------------------------
+
+2. function Users(){
+ 
+  return(
+    <div class = "App">
+    <h1>Hello World</h1>,
+    <button onClick={()=>alert("Hello")}>Click me</button>
+    </div>
+)
+}
+
+export default Users;
+
+--------------------------------
+3. function Users(){
+  function app(){
+    alert('function called');
+  }
+  return(
+    <div class = "App">
+    <h1>Hello World</h1>,
+    <button onClick={()=>alert("Hello")}>Click me</button>
+    <button onClick={()=>app()}>Click me</button>
+    </div>
+)
+}
+
+export default Users;
+
+-------------------------------------
+
+Bugg with the (let, var and const) in React that reassigned 
+value will not be accepted.
+EXAMPLE:
+
+function Users(){
+  let data="Sanjay Pal"
+  function app(){
+    alert(data);
+    data="Sunny";
+  }
+  return(
+    <div class = "App">
+    <h1>{data}</h1>,
+    <button onClick={()=>app()}>Click me</button>
+    </div>
+)
+}
+
+export default Users;
+
+In this code we assigned data with 'let' 
+and when we reassign value of data that will not change still same.
+thats why we use (STATES and PROPS).
+
+----------------------------------------------------------------------------------------
+
+//WHAT IS STATE IN REACT?:
+
+The state object is where you store property values that belongs to the component.
+When the state object changes, the component re-renders.
+
+//Can we use state outside the Component- No,
+there is a way to use outside but that is not authentic way//
+
+//state is public//
+
+
+//STATE USING FUNCTIONAL COMPONENT;
+
+
+import {useState} from 'react'
+
+function Users(){
+  const [data,setData]=useState("Sanjay")
+  function updateData()
+  {
+    setData("Pal")
+  }
+  return(
+    <div class = "App">
+    <h1>{data}</h1>,
+    <button onClick={()=>updateData()}>Click me</button>
+    </div>
+)
+}
+
+export default Users;
+
+------------------------x
+//ONE INCREAMENT ON CLICK
+
+import {useState} from 'react'
+
+function Users(){
+  const [data,setData]=useState(0)
+  function updateData()
+  {
+    setData(data+1)
+  }
+  return(
+    <div class = "App">
+    <h1>{data}</h1>,
+    <button onClick={()=>updateData()}>Click me</button>
+    </div>
+)
+}
+
+export default Users;
+
+-------------------------------------------
+
+//BUTTON FOR INCREAMENT AND DECREAMENT:
+
+import {useState} from 'react'
+
+function Users(){
+  const [data,setData]=useState(0)
+  
+  function updateData()
+  {
+    setData(data+1)
+    
+  }
+  function updateData1()
+  {
+    
+    setData(data-1)
+  }
+  return(
+    <div class = "App">
+    <h1>Increment/Decrement Numbers Using Functional Component:</h1>
+    <h1>{data}</h1>
+    
+    <button onClick={()=>updateData()}>Click for Increament</button>
+    <div >
+    <button onClick={()=>updateData1()}>Click for Decrement</button>
+    </div>
+    </div>
+
+
+-----------------------------------------------------------------------------
+
+//STATE USING CLASS COMPONENT:
+
+
+import React from 'react' 
+
+class Users extends React.Component {
+
+  constructor()
+  {
+    super();
+    this.state={
+      data: "Sanjay"
+    }
+  }
+  render()
+  {
+    return (
+      <div class = "App">
+        <h1>{this.state.data}</h1>
+      </div>
+    )
+  }
+}
+
+export default Users;
+
+---------------------------------------------
+
+import React from 'react' 
+
+class Users extends React.Component {
+
+  constructor()
+  {
+    super();
+    this.state={
+      data: 0
+    }
+  }
+  update()
+  {
+    this.setState({data: this.state.data+1})
+  }
+  update1()
+  {
+    this.setState({data: this.state.data-1})
+  }
+  render()
+  {
+    return (
+      <div class = "App">
+
+        <h1>Increment/Decrement Numbers Using Class Component:</h1>
+        <h1>{this.state.data}</h1>
+        <button onClick={()=>this.update()}>Increment</button>
+        <div><button onClick={()=>this.update1()}>Decrement</button></div>
+      </div>
+    )
+  }
+}
+
+---------------------------------------------------------------------------------
+
+//What is Props?:
+
+//Props are arguments passed into React components.
+
+//Props are passed to components via HTML attributes.
+
+//Props stands for Properties.
+
+//React Props are like function arguments in JavaScript and attributes in HTML.
+
+=============================================
+function Students(props)
+{
+    console.log(props.name)
+    return(
+    <div style={{backgroundColor: "lightblue", padding:"10px", margin: "10px", textAlign:"center" }}>
+        <h1>Hello {props.name}</h1>
+        <h2>Email: {props.email}</h2>
+        <h2>Phone: {props.phone}</h2>
+    </div>
+    )
+}
+
+export default Students;
+
+========
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import Students from './Students';
+
+
+import reportWebVitals from './reportWebVitals';
+
+ReactDOM.render(
+ <React.StrictMode>
+   <h1 style={{textAlign: "center"}}>Hello React!</h1>
+   <Students name={"Sanjay"} email={"sp@gmail.com"} phone={"01234"}  />
+   <Students name={"Sunny"} email={"sn@gmail.com"} phone={"01234"} />
+   <Students name={"Pal"} email={"pl@gmail.com"} phone={"01234"} />
+
+ </React.StrictMode>,
+  document.getElementById('root')
+);
+
+===============================================
+
+
+PROPS USING CLASS COMPONENT:
+
+import React from 'react' 
+
+class Students extends React.Component{
+
+    render()
+    {
+        return(
+            <div style={{textAlign:"center"}}>
+            <h1>Student {this.props.name}</h1>
+            </div>
+        )
+    }
+}
+
+
+export default Students;
+
+========================================
+//APP.js
+
+
+import React from 'react' 
+import Students from './Students'
+
+class App extends React.Component {
+  constructor()
+  {
+    super();
+    this.state={
+      name:"Sanjay"
+    }
+  }
+  render()
+  {
+    return (
+      <div style={{textAlign:"center"}}className="App">
+        
+        <Students name= {this.state.name} />
+        <button onClick={()=>this.setState({name: "Sunny"})}>Update Name</button>
+      </div>
+    )
+  }
+}
+export default App;
+
+-----------------
+
+//Students.js
+
+import React from 'react' 
+
+class Students extends React.Component{
+  
+    render()
+    {
+        return(
+            <div style={{textAlign:"center"}}>
+            <h1>{this.props.name}</h1>
+            
+            </div>
+        )
+    }
+}
+
+
+export default Students;
+
+---------------------------------------------------------------------------------------
+
+////INPUT BOX VALUE
+
+
+import logo from './logo.svg';
+import './App.css';
+import React,{useState} from 'react'
+
+function App(){
+  const [data,setData]=useState(null)
+  const [print,setPrint]=useState(false)
+
+  function getData(val)
+  {
+    console.log(val.target.value)
+    setData(val.target.value)
+    setPrint(false)
+  }
+  return (
+    <div className="App">
+      {
+        print?
+      <h1>{data}</h1>
+      :null
+    }
+
+      <input type="text" onChange={getData}/><br />
+
+      <button onClick={()=>setPrint(true)}>Print Data</button>
+
+    </div>
+  )
+}
+
+export default App;
+
+---------------------------------------------------------------------
+
+//HIDE AND SHOW DATA
+
+//HIDE AND SHOW DATA THROUGH THE TWO BUTTONS:
+
+
+import logo from './logo.svg';
+import './App.css';
+import React from 'react'
+
+  function App()
+  
+  {
+    const [status,setStatus]=React.useState(true)
+    return (
+      <div className="App">
+        {
+          status?
+          <h1>Hello World !</h1>
+          :null
+        }
+        
+        <button onClick={()=>setStatus(false)}>Hide</button>
+        
+        <button onClick={()=>setStatus(true)}>Show</button>
+        
+    
+      </div>
+    )
+  }
+  
+
+
+export default App;
+
+====================
+
+//HIDE AND SHOW DATA THROUGH THE SINGLE BUTTON:
+
+import logo from './logo.svg';
+import './App.css';
+import React from 'react'
+
+  function App()
+  
+  {
+    const [status,setStatus]=React.useState(true)
+    return (
+      <div className="App">
+        {
+          status?
+          <h1>Hello World !</h1>
+          :null
+        }
+        
+        
+        
+        <button onClick={()=>setStatus(!status)}>Click Here</button>
+        
+    
+      </div>
+    )
+  }
+  
+
+---------------------------------------------------------------------------------------------------------------
+
+//HANDLE FORMS IN REACT
+
+
+import logo from './logo.svg';
+import './App.css';
+import React,{useState} from 'react'
+
+  function App() {
+
+    const [name,setName]=useState('');
+    const [tnc,setTnc]=useState(false);
+    const [interest,setInterest]=useState('');
+
+    function getFormData(e) 
+    {
+      console.log(name,tnc,interest)
+      e.preventDefault()
+    }
+
+    return (
+
+      <div className="App">
+
+        <h1>Form in React</h1>
+        <form onSubmit={getFormData}>
+          <input type="text" placeholder="enter name" onChange={(e)=>setName(e.target.value)}></input><br /><br />
+
+          <select onChange={(e)=>setInterest(e.target.value)}>
+
+          <option>Select</option>
+            <option>Library</option>
+            <option>Faculty</option>
+            <option>Campus</option>
+
+          </select><br /><br />
+
+          <input type="checkbox" onChange={(e)=>setTnc(e.target.checked)}/><span>Accept Terms and Conditions</span><br /><br />
+
+          <button type="submit">Submit</button>
+
+        </form>
+        </div>
+    )
+  }
+
+export default App;
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+//CONDITIONAL RENDERING || IF CONDITION
+
+//IF ELSE, ELSE IF
+
+
+import React,{useState} from 'react'
+
+// function Profile()
+// {
+//     const [loggedIn, setLoggedIn]= useState(true)
+//     return (
+//         <div>
+//             {loggedIn?<h1>Welcome</h1>:<h1>Exit</h1>}
+//         </div>
+//     )
+// }
+
+function Profile()
+{
+    const [loggedIn, setLoggedIn]= useState(2)
+    return (
+        <div>
+            {loggedIn==1?
+            <h1>Go</h1>:loggedIn==2?
+            <h1>Went</h1>:<h1>Gone</h1>}
+        </div>
+    )
+}
+
+
+
+export default Profile;
+
+-----------------------------------------------------------------------------------------------------------------
+
+//PASS FUNCTION AS A PROPS
+
+//PROFILE.JS
+
+
+import React from 'react'
+
+function Profile(props) {
+    return (
+        <div>
+            <h1>Profile Component</h1>
+            <button onClick={()=>props.data()}>Call Data</button>
+        </div>
+    )
+}
+
+
+export default Profile;
+
+
+//APP.JS
+
+import logo from './logo.svg';
+import './App.css';
+import Profile from './Profile'
+
+import React,{useState} from 'react'
+
+  function App() {
+    function getData()
+    {
+      alert ("hello World")
+    }
+    
+    return (
+      
+      
+      <div className="App">
+  
+      <Profile data={getData}/>
+      </div>
+    )
+  }
+
+-------------------------------------------------------------------------------------------------------
+
+//LIFE CYCLE METHOD:
+
+//USING CONSTRUCTOR:
+
+
+import logo from './logo.svg';
+import './App.css';
+
+
+import React from 'react'
+
+class App extends React.Component{
+  constructor()
+  {
+    super();
+    this.state={
+      data:"Sanjay"
+    }
+  }
+  render()
+  {
+   
+    return(
+      <h1>Hello {this.state.data}</h1>
+    )
+  }
+}
+
+export default App;
+
+
+------------------------------------------------------------------------------------
+
+//RENDER LIFE CYCLE METHOD
+
+
+
+
+import React from 'react'
+class Profile extends React.Component{
+    constructor()
+    {
+        super();
+        this.state={
+            email: "sp@gmail.com"
+        }
+    }
+    
+    render()
+    {
+        console.log("Render Method" ,this.state.email)
+        return(
+            <div>
+                <h1>User Component {this.state.email} </h1>
+                <button onClick={()=>this.setState({email: 'nb@gmail.com'})}>Update Email</button>
+            </div>
+        )
+    }
+}
+
+
+-------------------------------------------------------------------------------------------------
+
+// COMPONENTDIDMOUNT LIFE CYCLE METHOD:
+
+
+
+import logo from './logo.svg';
+import './App.css';
+import React from "react"
+
+class App extends React.Component {
+  
+  constructor()
+  {
+    super();
+    console.log("constructor")
+  }
+  componentDidMount()
+  {
+    console.log("componentDidMount")
+  }
+  render()
+  {
+    console.log("render")
+    return (
+      <div className="App">
+        <h1>Component Did Mount</h1>
+      </div>
+    )
+  }
+}
+
+============================
+
+import logo from './logo.svg';
+import './App.css';
+import React from "react"
+
+class App extends React.Component {
+  
+  constructor()
+  {
+    super();
+    this.state={
+      name: "Sanjay"
+    }
+    console.log("constructor")
+  }
+  componentDidMount()
+  {
+    console.log("componentDidMount")
+  }
+  render()
+  {
+    console.log("render")
+    return (
+      <div className="App">
+        <h1>Component Did Mount, {this.state.name}</h1>
+        <button onClick={()=>{this.setState({name: "Sunny"})}}>Update Name</button>
+      </div>
+    )
+  }
+}
+
+
+
+
+
+
+export default App;
+
+----------------------------------------------------------------------------------------
+
+//COMPONENTDIDUPDATE, LOFE CYCLE METHOD:
+
+import logo from './logo.svg';
+import './App.css';
+import React from "react"
+
+class App extends React.Component {
+  
+  constructor()
+  {
+    super();
+    this.state={
+      count: 0,
+    }
+    console.log("constructor")
+  }
+  componentDidUpdate(preProps,preState,snapshot)
+  {
+    console.log("componentDidUpdate", preState.count,this.state.count)
+    if(preState.count===this.state.count)
+    {
+      alert("data is same")
+    }
+  }
+  render()
+  {
+    console.log("render")
+    return (
+      
+      <div className="App">
+        <h1>Component Did Mount, {this.state.count}</h1>
+        <button onClick={()=>{this.setState({count: 1})}}>Update </button>
+      </div>
+    )
+  }
+}
+
+
+export default App;
+
+
+-----------------------------------------------------------------------------------------
+
+//SHOULD COMPONENT UPDATE LIFE CYCLE METHOD:
+
+import logo from './logo.svg';
+import './App.css';
+import React from "react"
+
+class App extends React.Component {
+  
+  constructor()
+  {
+    super();
+    this.state={
+      count: 1
+    }
+    }
+    shouldComponentUpdate()
+    {
+      console.log("shouldComponentUpdate", this.state.count)
+      return true;
+    }
+  
+
+  render()
+  {
+    console.log("render")
+    return (
+      
+      <div className="App">
+        <h1>Should Component Update {this.state.count}</h1>
+        <button onClick={()=>{this.setState({count: this.state.count+1})}}>Update Count</button>
+      
+      </div>
+    )
+  }
+}
+
+
+export default App;
+
+==========================
+
+import logo from './logo.svg';
+import './App.css';
+import React from "react"
+
+class App extends React.Component {
+  
+  constructor()
+  {
+    super();
+    this.state={
+      count: 1
+    }
+    }
+    shouldComponentUpdate()
+    {
+      console.log("shouldComponentUpdate", this.state.count);
+      if(this.state.count>5 && this.state.count<10){
+        return true;
+      }
+      
+    }
+  
+
+  render()
+  {
+    console.log("render")
+    return (
+      
+      <div className="App">
+        <h1>Should Component Update {this.state.count}</h1>
+        <button onClick={()=>{this.setState({count: this.state.count+1})}}>Update Count</button>
+      
+      </div>
+    )
+  }
+}
+
+
+export default App;
+
+----------------------------------------------------------------------------------------------------
+
+//COMPONENT WILL UNMOUNT LIFE CYCLE METHOD:
+
+
+//APP.JS
+
+import logo from './logo.svg';
+import './App.css';
+import React from "react"
+import Students from './Students'
+
+class App extends React.Component {
+  constructor()
+  {
+    super();
+    this.state={
+      show: true
+    }
+  }
+  render()
+  {
+    return (
+      <div className="App">
+        {
+          this.state.show ? <Students />: <h1>child component removed</h1>
+        }
+        <button onClick={()=>this.setState({show: !this.state.show})}>Toggle Child Component</button>
+      </div>
+    )
+  }
+}
+  
+ 
+
+
+export default App;
+
+=====
+
+//STUDENTS.JS 
+
+
+import React from "react"
+
+class Students extends React.Component {
+    componentWillUnmount(){
+        alert("componentWillUnmount Called")
+    }
+  render()
+  {
+    return (
+      <div className="App">
+        <h1>Students Component</h1>
+      </div>
+    )
+  }
+}
+
+export default Students ;
+
+
+---------------------------------------------------------------------------
+
+//HOOKS IN REACT JS
+
+With Hook, we can use class component features in functional components 
+
+such as state, life cycle, pure component, etc.
+
+
+Hooks are a new addition in React 16.8. 
+
+They let you use state and other React features without writing a class.
+
+// WE CANNOT USE HOOKS IN CLASS COMPONENT//
+
+
+import React, { useState } from 'react';
+
+function Example() {
+  // Declare a new state variable, which we'll call "count"
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+
+
+----------------------------------------------------------------------------------
+
+//USE-EFFECT IN REACT:
+
+
+//If you’re familiar with React class lifecycle methods, 
+
+//you can think of useEffect Hook as 
+
+//componentDidMount, componentDidUpdate, and componentWillUnmount combined.
+
+
+import logo from './logo.svg';
+import './App.css';
+import React,{useState} from "react"
+// import Students from './Students'
+
+function App(){
+
+  const[count,setCount]=useState(0)
+  React.useEffect(()=>{
+    console.log("useEffect")
+  })
+
+  return(
+    <div className="App">
+      <h1>useEffect in React {count}</h1>
+      <button onClick={()=>setCount(count+1)}>Update Counter</button>
+      
+    </div>
+  );
+}
+
+----------------------------------------------------------------------
+
+// "USE-EFFECT" WITH SPECIFIC STATE AND PROPS:
+
+
+
+import logo from './logo.svg';
+import './App.css';
+import React, {useEffect, useState} from "react"
+// import Students from './Students'
+
+function App(){
+  const [data,setData]=useState(10);
+  const [count,setCount]=useState(100);
+  
+  useEffect(() => {
+    console.log("called with data state")
+  },[data])
+
+  useEffect(() => {
+    alert("count  is " + count)
+  },[count])
+
+  return (
+    <div className="App">
+      <h1>Count : {count}</h1>
+      <h1>Data : {data}</h1>
+
+      <button onClick={()=>setCount(count+1)}>Update Count</button>
+      <button onClick={()=>setData(data+1)}>Update Data</button>
+      
+      
+    </div>
+  )
+}
+
+
+=================================================
+
+// APPS.JS
+
+import logo from './logo.svg';
+import './App.css';
+import React, {useEffect, useState} from "react"
+import Students from './Students'
+
+function App(){
+  const [data,setData]=useState(10);
+  const [count,setCount]=useState(100);
+  
+  return (
+    <div className="App">
+    
+    <Students count={count+1} data={data+1}/>
+
+      <button onClick={()=>setCount(count+1)}>Update Count</button>
+      <button onClick={()=>setData(data+1)}>Update Data</button>
+      
+      
+    </div>
+  )
+}
+
+=============
+
+//STUDENTS.JS
+
+
+
+import React,{useEffect} from "react"
+
+function Students(props){
+
+  useEffect(()=>{
+    console.log("useEffect")
+    alert("count is" + props.count)
+  }, [props.count])
+
+  return(
+    <div className="App">
+    <h1>Count Props: {props.count}</h1>
+    <h1>Data Props: {props.data}</h1>
+    </div>
+  )
+}
+
+
+
+export default Students ;
+
+===============================
+
+
+
+
+import React,{useEffect} from "react"
+
+function Students(props){
+
+  useEffect(()=>{
+    console.log("useEffect")
+    alert("count is " + props.count)
+  }, [props.count, props.data])
+
+  return(
+    <div className="App">
+    <h1>Count Props: {props.count}</h1>
+    <h1>Data Props: {props.data}</h1>
+    </div>
+  )
+}
+
+
+
+export default Students ;
+
+
+
+-------------------------------------------------------------------------------------------------------------
+
+
+//STYLE TYPE IN REACT.JS//
+
+// NORMAL STYLE SHEET:
+
+.primary{
+    background-color: black;
+    color: #fff;
+}
+
+//import "./style.css"
+
+function App(){
+ 
+  
+  return (
+    <div className="App">
+    
+      <h1 className="primary">Style in React</h1>
+
+    </div>
+  )
+}
+
+================
+
+// INLINE STYLE:
+
+function App(){
+ 
+  
+  return (
+    <div className="App">
+    
+      <h1 style={{backgroundColor: 'black', color: 'green'}}>Style in React</h1>
+
+    </div>
+  )
+}
+
+==================
+
+// CSS WITH MODULE:
+
+
+*CUSTOME.MODULE.CSS*
+
+.success{
+    background-color: black;
+    color: red;
+}
+
+
+*APP.JS*
+
+import style from "./custom.module.css"
+
+function App(){
+ 
+  
+  return (
+    <div className="App">
+    
+      <h1 className="primary">Style in React</h1>
+      <h1 style={{backgroundColor: 'black', color: 'green'}}>Style in React</h1>
+      <h1 className={style.success}>Style in React</h1>
+
+    </div>
+  )
+}
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+//INSTALL BOOTSTRAP//
+
+*APP.JS*
+
+import {Button, Alert} from 'react-bootstrap'//
+
+function App(){
+ 
+  
+  return (
+    <div className="App">
+    {
+    
+  <Alert variant='warning'>
+    This is a warning alert—check it out!
+  </Alert>
+
+}
+
+    </div>
+
+)
+}
+
+
+*INDEX.JS*
+
+
+import 'bootstrap/dist/css/bootstrap.min.css';//
+
+
+---------------------------------------------------------------------------------------------------------
+
+//HANDLE ARRAY WITH LIST//
+
+// MAP AND FOR LOOP:
+
+// We can either use 'Map' or 'For' loop in a function
+
+// but we cannot use 'For' loop in 'return' keyword
+
+// thats why we use 'Map' mostly.  
+
+
+*APP.JS*
+
+import logo from './logo.svg';
+import './App.css';
+import React from "react"
+// import {Button, Alert} from 'react-bootstrap'
+// import "./style.css"
+// import style from "./custom.module.css"
+// import Students from './Students'
+
+function App(){
+ 
+  const students = ['Sanjay', 'Sunny','Pal', 'Neha'];
+
+  // students.map((item)=>{
+  //   console.log(item);
+  //   // alert(item)
+  // });
+
+  // for(let i=0;i<students.length;i++){
+  //   console.log('my name is ', students[i])
+  // }
+  return (
+    <div className="App">
+    {
+      <h1>Handle Array with List</h1>
+    }
+    {
+      students.map((data)=>
+      <h1>{data}</h1>)
+    }
+    
+    </div>
+  )
+}
+
+export default App;
+
+
+----------------------------------------------------------------
+
+//MAKE LIST WITH ARRAY OF OBJECT//
+
+import logo from './logo.svg';
+import './App.css';
+import React from "react"
+
+
+function App(){
+ 
+  // const students = ['Sanjay', 'Sunny','Pal', 'Neha'];
+
+  const  students=[
+    {name: 'Sanjay', email: 'sp@gmail.com', contact: 888},
+    {name: 'Sunny', email: 'sn@gmail.com', contact: 111},
+    {name: 'Pal', email: 'pl@gmail.com', contact: 222}
+  ]
+
+  return (
+    <div className="App">
+    
+      <h1>Handle Array with List</h1>
+      <table border ="1">
+    
+    {
+      students.map((data)=>
+      <tr>
+        <td>{data.name}</td>
+        <td>{data.email}</td>
+        <td>{data.contact}</td>
+      </tr>)
+}
+</table>
+    
+    </div>
+  )
+}
+
+export default App;
+
+--------------------------------------------------------
+
+
+//LIST WITH BOOTSTRAP AND UNIQUE KEY//
+
+* Make List from Array
+
+* What is Unique Key in Loop?
+
+* install Bootstrap
+
+* Use Bootstrap Table with Loop
+
+
+
+import logo from './logo.svg';
+import './App.css';
+import React from "react"
+
+
+function App(){
+
+  const  users=[
+    {name: 'Sanjay', email: 'sp@gmail.com', contact: 888},
+    {name: 'Sunny', email: 'sn@gmail.com', contact: 111},
+    {name: 'Pal', email: 'pl@gmail.com', contact: 222}
+  ]
+
+  return (
+    <div className="App">
+    
+      <h1>List with Bootstrap</h1>
+
+  <table>
+    <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Email</td>
+      <td>Contact</td>
+    </tr>
+    {
+      users.map((item, i)=>
+      <tr key={i}>
+        <td>{item.name}</td>
+        <td>{item.email}</td>
+        <td>{item.contact}</td>
+      </tr>
+      )
+    }
+    </tbody>
+    </table>
+    </div>
+  );
+}
+
+export default App;
+
+============
+
+// Table with Bootstrap//
+
+
+import logo from './logo.svg';
+import './App.css';
+import React from "react"
+import {Table} from 'react-bootstrap'
+// import "./style.css"
+// import style from "./custom.module.css"
+// import Students from './Students'
+
+function App(){
+ 
+  // const students = ['Sanjay', 'Sunny','Pal', 'Neha'];
+
+  const  users=[
+    {name: 'Sanjay', email: 'sp@gmail.com', contact: 888},
+    {name: 'Sunny', email: 'sn@gmail.com', contact: 111},
+    {name: 'Pal', email: 'pl@gmail.com', contact: 222}
+  ]
+
+  return (
+    <div className="App">
+    
+      <h1>List with Bootstrap</h1>
+  <Table striped bordered hover variant="dark">
+    <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Email</td>
+      <td>Contact</td>
+    </tr>
+    {
+      users.map((item, i)=>
+      <tr key={i}>
+        <td>{item.name}</td>
+        <td>{item.email}</td>
+        <td>{item.contact}</td>
+      </tr>
+      )
+    }
+    </tbody>
+    </Table>
+    </div>
+  );
+}
+
+export default App;
+
+================
+
+import logo from './logo.svg';
+import './App.css';
+import React from "react"
+import {Table} from 'react-bootstrap'
+// import "./style.css"
+// import style from "./custom.module.css"
+// import Students from './Students'
+
+function App(){
+ 
+  // const students = ['Sanjay', 'Sunny','Pal', 'Neha'];
+
+  const  users=[
+    {name: 'Sanjay', email: 'sp@gmail.com', contact: 888},
+    {name: 'Sunny', email: 'sn@gmail.com', contact: 111},
+    {name: 'Pal', email: 'pl@gmail.com', contact: 222}
+  ]
+
+  return (
+    <div className="App">
+    
+      <h1>List with Bootstrap</h1>
+  <Table striped variant="dark">
+    <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Email</td>
+      <td>Contact</td>
+    </tr>
+    {
+      users.map((item, i)=>
+      item.contact == '222'?
+      <tr key={i}>
+        <td>{item.name}</td>
+        <td>{item.email}</td>
+        <td>{item.contact}</td>
+      </tr>:null
+      )
+    }
+    </tbody>
+    </Table>
+    </div>
+  );
+}
+
+export default App;
+
+
+-------------------------------------------------------------------------------
+
+
+// NESTED LIST WITH NESTED ARRAY//
+
+* Make Nested Array
+
+* Understand Nested Array
+
+* Use of Map Function
+
+* Use Nested Map Function
+
+
+import logo from './logo.svg';
+import './App.css';
+import React from "react";
+import { Table } from 'react-bootstrap';
+// import "./style.css"
+// import style from "./custom.module.css"
+// import Students from './Students'
+
+function App() {
+
+  // const students = ['Sanjay', 'Sunny','Pal', 'Neha'];
+
+  const users = [
+    {
+      name: 'Sanjay', email: 'sp@gmail.com', Address: [{ House: "10", City: "Bhopal", Country: "India" },
+      { House: "11", City: "Indore", Country: "India" },
+      { House: "12", City: "Jabalpur", Country: "India" },
+      { House: "13", City: "Gwalior", Country: "India" }]
+    },
+    {
+      name: 'Sunny', email: 'sn@gmail.com', Address: [{ House: "10", City: "Bhopal", Country: "India" },
+      { House: "11", City: "Indore", Country: "India" },
+      { House: "12", City: "Jabalpur", Country: "India" },
+      { House: "13", City: "Gwalior", Country: "India" }]
+    },
+    {
+      name: 'Pal', email: 'pl@gmail.com', Address: [{ House: "10", City: "Bhopal", Country: "India" },
+      { House: "11", City: "Indore", Country: "India" },
+      { House: "12", City: "Jabalpur", Country: "India" },
+      { House: "13", City: "Gwalior", Country: "India" }]
+    }
+  ]
+
+  return (
+    <div className="App">
+      <h1> List with Nested Array</h1>
+      <Table striped variant="dark">
+        <tbody>
+          <tr>
+            <td>S.N</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Address</td>
+          </tr>
+
+          {
+            users.map((item, i) =>
+              <tr key={i}>
+                <td>{i + 1}</td>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
+                <td>
+                  <Table striped variant="dark">
+                    <tbody>{
+                      item.Address.map((data) =>
+                        <tr>
+                          <td>{data.House}</td>
+                          <td>{data.City}</td>
+                          <td>{data.Country}</td>
+                        </tr>)
+                    }</tbody>
+                  </Table>
+
+                </td>
+
+              </tr>
+            )
+          }
+        </tbody>
+      </Table>
+    </div>
+  );
+}
+
+export default App;
+
+
+-----------------------------------------------------------------------------------
+
+
+//REUSE COMPONENT//
+
+* Make a Component
+
+* Make a List from the Array
+
+* Use Component Inside Map Function 
+
+
+
+
+//*App.js*//
+
+
+function App() {
+
+
+  const users = [
+    { name: 'Sanjay', email: 'sp@gmail.com', contact: 888 },
+    { name: 'Sunny', email: 'sn@gmail.com', contact: 111 },
+    { name: 'Pal', email: 'pl@gmail.com', contact: 222 }
+  ]
+
+  return (
+    <div className="App">
+
+      <h1>Reuse Component with List</h1>
+
+      {
+        users.map((item)=>
+        <User data={item}/>
+        )
+      }
+
+    </div>
+  );
+}
+
+export default App;
+
+===========
+
+//*Users.js*//
+
+
+
+
+function User(props)
+{
+  return(
+      <div>
+          <span>{props.data.name}</span>
+          <span>{props.data.email}</span>
+          <button onClick={()=>alert(props.data.name)}>Hello</button>
+      </div>
+  )  
+}
+
+export default User;
+
+-----------------------------------------------------------------------------
+
+
+// REACT FRAGMENT //
+
+
+A common pattern in React is for a component to return multiple elements. 
+
+Fragments let you group a list of children without adding extra nodes to the DOM.
+
+
+
+import React from "react";
+
+
+function User()
+{
+  return(
+      <React.Fragment>
+         <h1>React Fragment</h1>
+
+      </React.Fragment>
+  )  
+}
+
+export default User;
+
+
+import React from "react";
+
+
+function User()
+{
+  return(
+      <>
+         <h1>React Fragment</h1>
+
+      </>
+  )  
+}
+
+export default User;
+
+
+--------------------------------------------------------------------------
+
+
+// SEND DATA CHILD TO PARENT COMPONENT //
+OR
+// LIFTING STATE UP // 
+
+
+
+
+// EXAMPLE FOR PARENT TO CHILD //
+
+** User.js **
+
+
+import React from "react";
+
+
+function User(props)
+{
+  return(
+      <div>
+        <h1>User Name : {props.name}</h1>
+        <button>Click me</button>
+      </div>
+  )  
+}
+
+export default User;
+
+
+=======
+
+
+** App.js **
+
+
+import logo from './logo.svg';
+import './App.css';
+import React from "react";
+import {button} from 'react-bootstrap';
+import User from './User'
+// import "./style.css"
+// import style from "./custom.module.css"
+// import Students from './Students'
+
+function App() {
+
+  let data="Sanjay pal"
+  return (
+    <div className="App">
+
+      <h1>send data child to parent</h1>
+      <User name={data}/>
+
+    </div>
+  );
+}
+
+export default App;
+
+
+
+==========================
+
+
+// EXAMPLE FOR CHILD TO PARENT //
+
+
+** User.js **
+
+
+import React from "react";
+
+
+function User(props)
+{
+  const name="Sanjay pal"
+  return(
+      <div>
+        <h1>User Name : </h1>
+        <button onClick={()=>props.alert(name)}>Click me</button>
+        
+      </div>
+  )  
+}
+
+export default User;
+
+============
+
+** App.js **
+
+
+import logo from './logo.svg';
+import './App.css';
+import React from "react";
+import {button} from 'react-bootstrap';
+import User from './User'
+// import "./style.css"
+// import style from "./custom.module.css"
+// import Students from './Students'
+
+function App() {
+
+  function parentAlert(name){
+
+    alert(name)
+    
+  }
+  return (
+    <div className="App">
+
+      <h1>send data child to parent</h1>
+      <User alert={parentAlert}/>
+
+    </div>
+  );
+}
+
+export default App;
+
+
+-----------------------------------------------------------------------------------------------
+
+// PURE COMPONENT //
+
+// Pure Component Stops the Rerendering of the Element.
+
+// It works with Class Component 
+
+
+class App extends React.PureComponent {
+  
+  constructor()
+  {
+    super();
+    this.state={
+      count:1
+    }
+  }
+
+  render()
+  {
+    console.log("check Rerendering")
+    return (
+      <div className="App">
+        <h1>Pure Component in React {this.state.count}</h1>
+
+        <button onClick={()=>this.setState({count:1})}>Update Count</button>
+
+      </div>
+    )
+  }
+} 
+
+export default App;
+
+------------------------------------------------------------------------------
+
+
+// USEMEMO HOOK IN REACT.JS //
+
+// The useMemo is a Hook used in the Functional Component of react that returns
+
+// a Memoized value.
+
+
+import logo from './logo.svg';
+import './App.css';
+import React, {useState, useMemo} from "react";
+import { button } from 'react-bootstrap';
+// import User from "./User"
+
+
+function App() {
+
+  const [count, setCount] = useState(0)
+  const [item, setItem] = useState(10)
+
+ const multiCountMemo = useMemo( function multiCount()
+
+ {
+   console.log("nultiCount")
+   return count*5
+ },[count])
+
+  return (
+
+    <div className="App">
+      <h1>useMemo Hook </h1>
+      <h2>Count: {count}</h2>
+      <h2>Item: {item}</h2>
+      <h2>{multiCountMemo}</h2>
+
+      <button onClick={() => setCount(count + 1)}>Update Count</button>
+      <button onClick={() => setItem(item * 2)}>Update item</button>
+    </div>
+  )
+
+}
+
+export default App; 
+
+
+
+------------------------------------------------------------------------------------------------------
+
+// REF IN REACT.JS //
+
+
+// Refs provide a way to access DOM nodes 
+
+// or React elements created in the render method.
+
+// When to Use Refs
+There are a few good use cases for refs:
+
+* Managing focus, text selection, or media playback.
+* Triggering imperative animations.
+* Integrating with third-party DOM libraries.
+
+Avoid using refs for anything that can be done declaratively.
+
+For example, instead of exposing open() and close() methods 
+
+on a Dialog component, pass an isOpen prop to it.
+
+
+
+
+import React, { createRef } from "react";
+
+
+class App extends React.Component {
+
+  constructor() {
+    super();
+    this.inputRef = createRef();
+  }
+  componentDidMount() {
+    // console.log(this.inputRef.current.value = "1000")
+  }
+
+  getVal()
+  {
+    console.log(this.inputRef.current.value)
+    this.inputRef.current.style.backgroundColor="black"
+    this.inputRef.current.style.color="white"
+  }
+
+  render() {
+
+    return (
+      <div className="App">
+        <h1>Ref in React</h1>
+        <input type="text" ref={this.inputRef}></input>
+        <button onClick={()=>this.getVal()}>Check Ref</button>
+
+      </div>
+    )
+  }
+}
+
+export default App;
+
+
+==========================================
+
+import React, {useRef} from "react";
+
+function App()  {
+  let inputRef=useRef(null)
+
+  function handleInput()
+  {
+    console.log("function call")
+    inputRef.current.value="1000"
+    inputRef.current.focus()
+    inputRef.current.style.backgroundColor="black"
+    inputRef.current.style.color="white"
+    inputRef.current.style.display="large"
+  }
+
+    return (
+      <div className="App">
+        <h1>Ref in React</h1>
+       
+       <input type="text" ref={inputRef}></input>
+       <button onClick={()=>handleInput()}>Handle Input</button>
+
+      </div>
+    )
+ 
+}
+
+export default App;
+
+-------------------------------------------------------------------------------------
+
+
+// FORWARD-REF IN REACT.JS //
+
+
+Ref forwarding is a technique for automatically passing a ref through a component 
+
+to one of its children. This is typically not necessary for most components in the application. 
+
+However, it can be useful for some kinds of components, especially in reusable component libraries. 
+
+The most common scenarios are described below.
+
+
+** App.js **
+
+
+import logo from './logo.svg';
+import './App.css';
+import { } from 'react-bootstrap';
+import React, {useRef} from "react";
+
+import User from "./User"
+
+
+function App()  {
+  let inputRef= useRef(null)
+
+  function updateInput()
+  {
+    inputRef.current.value="1000"
+    inputRef.current.style.backgroundColor="black"
+    inputRef.current.style.color="yellow"
+  }
+
+    return (
+      <div className="App">
+        <h1>ForwardRef in React</h1>
+        <User ref={inputRef}/>
+        <button onClick={updateInput}>Update input</button>
+
+      </div>
+    )
+ 
+}
+
+export default App;
+
+
+** User.js **
+
+
+import React,{forwardRef} from "react";
+
+function User(props,ref)
+{
+  return(
+    <div>
+      <input type="text" ref={ref}/>
+    </div>
+  )
+}
+
+export default forwardRef(User);
+
+
+-------------------------------------------------------------------------------------------------
+
+
+// CONTROLLED COMPONENT //
+
+
+   In HTML, form elements such as <input>, 
+   <textarea>, and <select> typically maintain their own state and update 
+   it based on user input. 
+   In React, mutable state is typically kept in the state property of components, 
+   and only updated with setState().
+
+
+
+import React,{useState} from "react";
+
+
+function App()  {
+
+  let [val,setVal]=useState("")
+    return (
+      <div className="App">
+        <h1>Controlled Component</h1>
+        <h1>Value: {val}</h1>
+        <input type="text" value={val} onChange={(e)=>setVal(e.target.value)} /><br />
+        <input type="text" defaultValue="Name" onChange={(e)=>setVal(e.target.value)} />
+        
+      </div>
+    );
+ 
+}
+
+export default App;
+
+
+
+----------------------------------------------------------------------------------------------
+
+
+// UNCONTROLLED COMPONENT //
+
+
+// The Uncontrolled Components, Where form Data is Handled by the DOM itself.
+
+// In Controlled Components Form Data is Handled by a React Component. 
+
+
+
+*****************************************************
+                                                    *
+// TO PREVENT RELOADING //                          *
+                                                    * 
+function App()  {                                   *   
+                                                    *       
+  function submitForm(e)                            *                     
+  {                                                 *            
+    e.preventDefault()                              *    
+  }                                                 *            
+    return (                                        *    
+      <div className="App">                         *     
+        <h1>Controlled Component</h1>               *          
+        <form onSubmit={submitForm}>                *       
+        <input type="text" /><br /><br />           *         
+        <input type="text" /><br /><br />           *                 
+        <button>Submit</button>                     *         
+        </form>                                     *               
+                                                    *                   
+      </div>                                        *                  
+    );                                              *          
+                                                    *              
+}                                                   *         
+                                                    *                          
+export default App;                                 *                     
+                                                    *                 
+                                                    *                                               
+*****************************************************
+
+
+import React,{useRef} from "react";
+
+
+function App()  {
+
+  let inputRef=useRef(null)
+  let inputRef2=useRef(null)
+
+  function submitForm(e)
+  {
+    e.preventDefault()
+    console.log("Input Value : ", inputRef.current.value)
+    console.log("Input Value : ", inputRef2.current.value)
+    let input3=document.getElementById("input3").value
+    console.log("Input Value : ",input3)
+  }
+    return (
+      <div className="App">
+        <h1>Controlled Component</h1>
+        <form onSubmit={submitForm}>
+        <input ref={inputRef} type="text" /><br /><br />
+        <input ref={inputRef2} type="text" /><br /><br />
+        <input id="input3" type="text" /><br /><br />
+        <button>Submit</button>
+        </form>
+        
+      </div>
+    );
+ 
+}
+
+export default App;
+
+
+---------------------------------------------------------------------------------------------
+
+
+// SIMPLE HOC (HIGH ORDER COMPONENT) //
+
+
+    A higher-order component is a function that takes a component 
+    and returns a new component.
+
+    A higher-order component (HOC) is an advanced technique 
+    in React for reusing component logic. 
+    HOCs are not part of the React API, per se. 
+    They are a pattern that emerges from React’s compositional nature.
+
+
+
+import React,{useState} from "react";
+
+
+function App()  {
+
+    return (
+      <div className="App">
+        <h1>HOC</h1>
+        <HOCRed cmp={Counter} />
+        <HOCGreen cmp={Counter} />
+        <HOCBlue cmp={Counter} />
+      </div>
+    );
+ 
+}
+function HOCRed(props)
+{
+  return <h2 style={{backgroundColor:"red", width:100}}>Red<props.cmp /></h2>
+}
+function HOCGreen(props)
+{
+  return <h2 style={{backgroundColor:"green", width:100}}>Green<props.cmp /></h2>
+}
+function HOCBlue(props)
+{
+  return <h2 style={{backgroundColor:"blue" , width:100}}>Blue<props.cmp /></h2>
+}
+
+function Counter()
+{
+  const [count,setCount]=useState(0)
+  return(
+  <div>
+    <h3>{count}</h3>
+    <button onClick={()=>setCount(count+1)}>Update</button>
+  </div>
+  )
+}
+
+export default App;
+
+
+-------------------------------------------------------------------------------------------
+
+
+// ROUTING SETUP //
+
+
+     React Router is a standard library for routing in React. 
+     It enables the navigation among views of various components in a React Application, 
+     allows changing the browser URL, and keeps the UI in sync with the URL.
+
+
+
+import { BrowserRouter as Router,Route,Link } from "react-router-dom"
+
+import React from "react";
+
+
+function App()  {
+
+    return (
+      <div className="App">
+        <Router>
+          <Link to="/about">About Page</Link><br />
+          <Link to="/home">Home Page</Link>
+          <Route path="/about"><About /></Route>
+          <Route path="/home"><Home /></Route>
+          <Home />
+          <About />
+        </Router>
+      </div>
+    );
+ 
+}
+
+function Home()
+{
+  return(
+    <div>
+      <h1>Home Page</h1>
+      <p>This is Home Page</p>
+    </div>
+  )
+}
+
+function About()
+{
+  return(
+    <div>
+      <h1>About Page</h1>
+      <p>This is About Page</p>
+    </div>
+  )
+}
+
+
+export default App;
+
+
+=====================================
+
+// ROUTING EXAMPLE WITH BEST PRACTICES //
+
+
+* Use React Router Wrapper in index.js
+
+* Navbar file for Link
+
+* Components in Separate Files
+
+
+
+** index.js **
+
+import {BrowserRouter as Router} from "react-router-dom"
+import reportWebVitals from './reportWebVitals';
+
+ReactDOM.render(
+ <React.StrictMode>
+   <h1 style={{textAlign: "center"}}>Hello React!</h1>
+   <Router><App /></Router>
+   
+ </React.StrictMode>,
+  document.getElementById('root')
+);
+
+
+** App.js **
+
+import {Routes,Route,Link } from 'react-router-dom';
+import React from "react";
+import Nav from './Nav'
+import Home from "./Home"
+import About from "./About"
+
+
+function App()  {
+
+    return (
+      <div className="App">
+
+          
+          <Nav />
+          <Routes>
+          <Route exact path="/home" element={<Home />}></Route>
+          <Route exact path="/about" element={<About />}></Route>
+
+          </Routes>
+            
+      </div>
+      
+    );
+ 
+}
+
+export default App;
+
+** Home.js **
+
+
+function Home()
+{
+  return(
+    <div>
+      <h1>Home Page</h1>
+      <p>This is Home Page</p>
+    </div>
+  )
+}
+
+export default Home;
+
+
+** About.js **
+
+
+function About()
+{
+  return(
+    <div>
+      <h1>About Page</h1>
+      <p>This is About Page</p>
+    </div>
+  )
+}
+
+export default About;
+
+
+
+** Nav.js **
+
+
+import React from 'react'
+import {Link} from 'react-router-dom'
+
+function Nav()
+{
+    return(
+        <div>
+           <Link to="/home">Home</Link><br />
+           <Link to="/about">About</Link> 
+        </div>
+    )
+}
+
+export default Nav;
+
+
+
+----------------------------------------------------------------------------------------
+
+
+// DYNAMIC ROUTING WITH PARAMS //
+
+
+
+----------------------------------------------------------------------------------------------------
+
+
+// CALL GET METHOD API //
+
+
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      users: null
+    }
+  }
+  componentDidMount() {
+    fetch('https://reqres.in/api/users').then((resp) => {
+      resp.json().then((result) => {
+        // console.log(result.data)
+        this.setState({ users: result.data })
+      })
+    })
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1 class="bg-light text-black">Get API Call</h1>
+        {
+          this.state.users ?
+            this.state.users.map((item, i) =>
+              <div><p>{i}---
+                {item.first_name} --
+                {item.last_name} --
+                {item.email}</p></div>)
+            : null
+        }
+
+      </div>
+
+    );
+  }
+}
+
+
+export default App;
+
+
+-------------------------------------------------------------------------------------
+
+// POST API EXMPLE //
+
+
+
+import logo from './logo.svg';
+import './App.css';
+// import { } from 'react-bootstrap';
+import React,{useState} from "react";
+
+function App() {
+ 
+ const [first_name,setFirst_Name]=useState('');
+ const [last_name,setLast_Name]=useState('');
+ const [email,setEmail]=useState('');
+ const [avatar,setAvatar]=useState('');
+
+ function saveUser()
+ {
+   console.log({first_name,last_name,email,avatar});
+   let data=[first_name,last_name,email,avatar]
+   fetch("https://reqres.in/api/users",{
+     method: 'POST',
+     headers: {
+       'Accept': 'application/json',
+       'Content-Type': 'application/json'
+     },
+     body: JSON.stringify(data)
+
+   }).then((result)=>{
+     console.log("reuslt",result);
+   })
+ }
+
+    return (
+      <div className="App">
+        <h1 class="bg-light text-black">Get API Call</h1><br /><br />
+        <input type="text" value={first_name} onChange={(e)=>{setFirst_Name(e.target.value)}} name="first_name"/><br /><br />
+
+        <input type="text" value={last_name} onChange={(e)=>{setLast_Name(e.target.value)}} name="last_name"/><br /><br />
+
+        <input type="text" value={email} onChange={(e)=>{setEmail(e.target.value)}} name="email"/><br /><br />
+
+        <input type="text" value={avatar} onChange={(e)=>{setAvatar(e.target.value)}} name="avatar"/><br /><br />
+
+
+        <button type="button" onClick={saveUser}>Save new User</button>
+        
+
+      </div>
+
+    );
+  
+}
+
+
+export default App;
+
+
+----------------------------------------------------------------------------------
+
+
+// PREVIOUS STATE IN FUNCTIONAL COMPONENT //
+
+
+import logo from './logo.svg';
+import './App.css';
+import { Button } from 'react-bootstrap';
+import React, { useState } from "react";
+
+function App() {
+  const [count, setCount] = useState(1);
+
+  function updateCounter() {
+    let random = Math.floor(Math.random() * 20)
+    setCount((pre) => {
+      console.log(pre)
+      if (pre < 5) {
+
+        alert("low value")
+
+      } else {
+        return random;
+      }
+    })
+
+  }
+  return (
+    <div className="App">
+      <h1>State {count}</h1>
+      <Button onClick={updateCounter}>Update Counter</Button>
+    </div>
+  )
+}
+
+export default App;
+
+
+
+
+-----------------------------------------------------------------------------------------------
+
+
+// PREVIOUS PROPS WITH HOOKS //
+
+
+** App.js **
+
+import User from './User'
+import React, { useState } from "react";
+
+function App() {
+  const [count,setCount]=useState(0)
+  
+  return (
+    <div className="App">
+      <User count={count} />
+      <Button onClick={()=>setCount(Math.floor(Math.random()*10))}>Update Count</Button>   </div>
+  )
+}
+
+export default App;
+
+
+
+** User **
+
+import React,{useEffect,useRef} from 'react'
+
+function User(props){
+
+  const lastVal=useRef();  //it will take prev value
+  useEffect(()=>{
+    lastVal.current=props.count   
+  })
+  const previousProps=lastVal.current
+  return(
+    <div>
+      <h1>current Value {props.count}</h1><br />
+      <h2>Previous Value {previousProps}</h2><br />
+      <h2>Difference {previousProps-props.count}</h2><br />
+    </div>
+  )
+}
+
+export default User;
+
+=======================================================================================
+
+  /// React Custom Hooks //
+
+  
+
+   **** App.js ****
+
+import React, {useState,useEffect} from 'react' 
+import useTitle from './useTitle'
+
+function App(){
+  const [count,setCount]=useState(0)
+  useTitle(count)
+
+  return(
+    <div className="App">
+      <h1>Custom Hooks</h1>
+      <button onClick={()=>setCount(count+1)}>Clicks</button>
+     
+    </div>
+  )
+}
+
+
+  **** useTitle.js *****
+
+
+import { useEffect } from "react";
+
+const useTitle = (props) => {
+   useEffect(()=>{
+    document.title=props 
+   })
+}
+
+export default useTitle;
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
